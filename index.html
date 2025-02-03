@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer>
+        let balance = 1000;
+
+        function updateBalance() {
+            document.getElementById('balance').textContent = `$${balance.toFixed(2)}`;
+        }
+
+        function deposit() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0) {
+                balance += amount;
+                updateBalance();
+            } else {
+                alert('Enter a valid deposit amount.');
+            }
+            document.getElementById('amount').value = '';
+        }
+
+        function withdraw() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount > 0 && amount <= balance) {
+                balance -= amount;
+                updateBalance();
+            } else {
+                alert('Enter a valid withdrawal amount.');
+            }
+            document.getElementById('amount').value = '';
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Online Bank</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-8">Welcome to Your Online Bank</h2>
+            <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-8">
+                <h3 class="text-xl font-bold">Current Balance:</h3>
+                <p id="balance" class="text-2xl font-bold text-green-600 my-4">$1000.00</p>
+                <input type="number" id="amount" class="w-full p-3 border rounded-lg" placeholder="Enter amount">
+                <div class="flex justify-between mt-4">
+                    <button onclick="deposit()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600">Deposit</button>
+                    <button onclick="withdraw()" class="px-4 py-2 bg-red-500 text-white font-bold rounded-lg hover:bg-red-600">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 text-white text-center py-4">
+        <p>&copy; 2025 Online Bank. All rights reserved.</p>
+    </footer>
+
+    <script>
+        updateBalance();
+    </script>
+</body>
+</html>
